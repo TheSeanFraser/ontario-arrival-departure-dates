@@ -1,0 +1,303 @@
+Acadian Flycatcher, 05-01
+Alder Flycatcher, 05-14
+American Black Duck, 03-04
+American Avocet, 04-10
+American Bittern, 04-07
+American Crow, 02-19
+American Goldfinch, 04-10
+American Kestrel, 03-18
+American Pipit, 04-23
+American Redstart, 05-01
+American Robin, 03-02
+American Wigeon, 02-28
+American Woodcock, 03-04
+American Golden-Plover, 04-19
+American Tree Sparrow, 02-28
+American White Pelican, 04-15
+Arctic Tern, 05-16
+Bay-breasted Warbler, 05-02
+Baird's Sandpiper, 05-14
+Bald Eagle, 03-02
+Baltimore Oriole, 04-25
+Bank Swallow, 04-17
+Barrow's Goldeneye, 03-07
+Barn Swallow, 04-11
+Black-and-white Warbler, 04-22
+Black-bellied Whistling-Duck, 04-14
+Black-crowned Night-Heron, 04-02
+Belted Kingfisher, 03-24
+Black-billed Cuckoo, 05-07
+Black-bellied Plover, 04-22
+Blackburnian Warbler, 04-28
+Black-backed Woodpecker, 05-27
+Black-capped Chickadee, 02-28
+Black-necked Stilt, 04-21
+Blackpoll Warbler, 05-05
+Common/Black Scoter, 01-01
+Black Scoter, 04-30
+Black Tern, 04-30
+Black Vulture, 03-21
+Blue Jay, 04-23
+Brown-headed Cowbird, 03-18
+Bobolink, 04-29
+Bohemian Waxwing, 02-27
+Bonaparte's Gull, 03-24
+Boreal Chickadee, 05-31
+Brant, 05-05
+Barred Owl, 05-21
+Brown Creeper, 03-23
+Brown Pelican, 05-15
+Brown Thrasher, 04-09
+Broad-winged Hawk, 04-11
+Black-throated Blue Warbler, 04-25
+Black-throated Green Warbler, 04-22
+Buff-breasted Sandpiper, 05-15
+Bufflehead, 03-05
+Blue-gray Gnatcatcher, 04-18
+Blue-headed Vireo, 04-19
+Blue-winged Teal, 03-17
+Blue-winged Warbler, 04-22
+Cackling Goose, 02-24
+Cape May Warbler, 04-28
+Canada Goose, 02-23
+Canvasback, 02-20
+Canada Warbler, 05-02
+Carolina Wren, 04-14
+Caspian Tern, 04-06
+Cattle Egret, 04-08
+Cedar Waxwing, 05-05
+Cerulean Warbler, 04-23
+Chipping Sparrow, 04-07
+Chimney Swift, 04-23
+Chestnut-sided Warbler, 04-30
+Chuck-will's-widow, 05-01
+Clay-colored Sparrow, 04-25
+Cliff Swallow, 04-18
+Common Eider, 05-01
+Common Gallinule, 04-14
+Common Goldeneye, 03-03
+Common Grackle, 03-02
+Common Loon, 03-29
+Common Merganser, 02-25
+Common Nighthawk, 05-02
+Common Raven, 02-28
+Common Redpoll, 02-28
+Common Tern, 04-18
+Common Yellowthroat, 04-27
+Connecticut Warbler, 05-08
+Cooper's Hawk, 04-14
+Curlew Sandpiper, 05-15
+Dark-eyed Junco, 04-07
+Dickcissel, 05-01
+Double-crested Cormorant, 03-25
+Downy Woodpecker, 04-29
+Dunlin, 04-21
+Eared Grebe, 04-18
+Eastern Bluebird, 03-09
+Eastern Kingbird, 04-28
+Eastern Meadowlark, 03-11
+Eastern Screech-Owl, 05-02
+Eastern Phoebe, 03-21
+Eastern Towhee, 04-03
+Eastern Whip-poor-will, 04-21
+Eastern Wood-Pewee, 05-07
+Evening Grosbeak, 02-28
+Field Sparrow, 04-02
+Fish Crow, 03-09
+Forster's Tern, 04-04
+Fox Sparrow, 03-21
+Gadwall, 03-01
+Great Black-backed Gull, 02-28
+Glaucous Gull, 02-28
+Green-winged Teal, 03-06
+Golden-crowned Kinglet, 03-20
+Golden Eagle, 03-05
+Golden-winged Warbler, 04-26
+Grasshopper Sparrow, 04-25
+Great Blue Heron (Great Blue), 01-01
+Great Blue Heron, 03-17
+Great Crested Flycatcher, 04-30
+Great Egret, 03-31
+Greater Scaup, 02-20
+Greater Yellowlegs, 04-03
+Great Horned Owl, 04-16
+Green Heron, 04-19
+Gray Catbird, 04-25
+Canada Jay, 02-28
+Greater White-fronted Goose, 02-19
+Gray-cheeked Thrush, 04-29
+Gyrfalcon, 02-28
+Hairy Woodpecker, 02-28
+Harlequin Duck, 02-28
+Herring Gull, 03-03
+Hermit Thrush, 04-04
+Hoary Redpoll, 02-18
+Hooded Merganser, 03-02
+Hooded Warbler, 04-23
+Horned Grebe, 03-13
+Horned Lark, 02-18
+House Finch, 04-28
+House Wren, 04-21
+Hudsonian Godwit, 05-01
+Indigo Bunting, 05-01
+Kentucky Warbler, 04-25
+Killdeer, 03-03
+King Eider, 02-28
+Aztec/King Rail, 01-01
+King Rail, 04-18
+Kirtland's Warbler, 04-30
+Lapland Longspur, 02-28
+Lesser Black-backed Gull, 05-07
+Least Bittern, 04-26
+Least Flycatcher, 04-27
+Least Sandpiper, 04-30
+LeConte's Sparrow, 04-26
+Lesser Scaup, 03-04
+Lesser Yellowlegs, 04-14
+Lincoln's Sparrow, 04-25
+Little Gull, 04-06
+Long-billed Dowitcher, 04-19
+Long-eared Owl, 03-07
+Loggerhead Shrike, 04-08
+Long-tailed Duck, 03-07
+Magnolia Warbler, 04-30
+Mallard/Mexican Duck, 01-01
+Mallard, 03-02
+Marbled Godwit, 04-13
+Marsh Wren, 04-22
+Merlin, 03-08
+Mourning Warbler, 05-05
+Mute Swan, 02-27
+Nashville Warbler, 04-23
+Northern Hawk Owl, 02-28
+Northern Cardinal, 03-09
+Northern Flicker, 03-28
+Northern Goshawk, 04-07
+Hen/Northern Harrier, 01-01
+Northern Harrier, 03-20
+Northern Mockingbird, 04-06
+Northern Parula, 04-27
+Northern Pintail, 02-28
+Northern Shoveler, 03-04
+Northern/Great Gray Shrike, 01-01
+Northern Shrike, 02-28
+Northern Waterthrush, 04-21
+Northern Rough-winged Swallow, 04-10
+Nelson's Sparrow, 05-09
+Northern Saw-whet Owl, 02-20
+Olive-sided Flycatcher, 05-06
+Orchard Oriole, 04-25
+Orange-crowned Warbler, 04-24
+Osprey, 03-24
+Ovenbird, 04-26
+Pacific Loon, 05-01
+Palm Warbler, 04-19
+Parasitic Jaeger, 05-14
+Pectoral Sandpiper, 03-25
+Peregrine Falcon, 03-07
+Philadelphia Vireo, 05-02
+Pied-billed Grebe, 03-13
+Pileated Woodpecker, 03-11
+Pine Grosbeak, 02-28
+Pine Siskin, 02-13
+Pine Warbler, 04-07
+Piping Plover, 04-21
+Pomarine Jaeger, 03-15
+Prairie Warbler, 04-21
+Prothonotary Warbler, 04-25
+Purple Finch, 04-04
+Purple Martin, 04-09
+Purple Sandpiper, 03-06
+Red-breasted Merganser, 04-12
+Red-breasted Nuthatch, 05-07
+Red-bellied Woodpecker, 04-21
+Red Crossbill, 02-28
+Redhead, 02-20
+Red Knot, 05-11
+Red-eyed/Chivi Vireo, 01-01
+Red-eyed Vireo, 05-07
+Red-headed Woodpecker, 04-22
+Red-necked Grebe, 03-01
+Red-necked Phalarope, 05-07
+Red-shouldered Hawk, 03-07
+Red-tailed Hawk, 02-28
+Red-throated Loon, 04-18
+Red-winged Blackbird, 02-27
+Ring-billed Gull, 02-28
+Ring-necked Duck, 03-02
+Rose-breasted Grosbeak, 04-25
+Rough-legged Hawk, 02-28
+Ross's Goose, 03-07
+Ruby-throated Hummingbird, 04-28
+Ruby-crowned Kinglet, 04-07
+Ruddy Duck, 03-09
+Ruddy Turnstone, 05-01
+Ruff, 04-14
+Ruffed Grouse, 03-27
+Rusty Blackbird, 03-21
+Sandhill Crane, 03-03
+Sanderling, 05-02
+Savannah Sparrow, 04-05
+Scarlet Tanager, 05-01
+Grass Wren, 01-01
+Sedge Wren, 04-26
+Semipalmated Plover, 05-01
+Semipalmated Sandpiper, 05-08
+Short-billed Dowitcher, 04-30
+Short-eared Owl, 02-28
+Sharp-shinned Hawk, 03-30
+Snow Bunting, 02-28
+Snow Goose, 02-25
+Snowy Owl, 02-28
+Solitary Sandpiper, 04-21
+Song Sparrow, 03-09
+Sora, 04-12
+Spotted Sandpiper, 04-20
+Stilt Sandpiper, 04-18
+Surf Scoter, 04-19
+Swamp Sparrow, 04-05
+Swainson's Thrush, 04-29
+Tennessee Warbler, 05-02
+Tree Swallow, 03-28
+Trumpeter Swan, 02-20
+Tufted Titmouse, 04-21
+Tundra Swan, 02-21
+Turkey Vulture, 03-07
+Upland Sandpiper, 04-16
+Veery, 04-26
+Vesper Sparrow, 03-28
+Virginia Rail, 04-05
+Warbling Vireo, 04-25
+Western Grebe, 02-22
+Western Sandpiper, 04-22
+Western Wood-Pewee, 01-01
+White-breasted Nuthatch, 02-28
+White-crowned Sparrow, 04-23
+White-eyed Vireo, 04-21
+Whimbrel, 05-09
+White-rumped Sandpiper, 05-06
+White-throated Sparrow, 04-13
+White-winged Crossbill, 02-28
+Velvet/White-winged/Stejneger's Scoter, 01-01
+White-winged Scoter, 02-21
+Willow Flycatcher, 05-08
+Willet, 04-16
+Wilson's Phalarope, 04-24
+Wilson's Snipe, 03-22
+Wild Turkey, 04-04
+Pacific/Winter Wren, 01-01
+Winter Wren, 03-24
+Wilson's Warbler, 05-02
+Wood Duck, 03-07
+Wood Thrush, 04-24
+American Coot, 03-04
+Iceland Gull, 02-28
+Yellow-crowned Night-Heron, 05-10
+Yellow-breasted Chat, 04-22
+Yellow-billed Cuckoo, 05-07
+Yellow-bellied Flycatcher, 05-07
+Yellow-bellied Sapsucker, 03-29
+Yellow Rail, 04-21
+Yellow Warbler, 04-23
+Yellow-rumped Warbler, 04-12
+Yellow-throated Vireo, 04-24
