@@ -19,5 +19,5 @@ def calculate_peak_spring_arrival():
 
 def calculate_winter_frequency():
 
-    
+
 def calculate_spring_mass_arrival():
