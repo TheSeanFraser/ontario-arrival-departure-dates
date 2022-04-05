@@ -688,4 +688,5 @@ dmypy.json
 # Cython debug symbols
 cython_debug/
 .vscode/launch.json
-config.py
+src/config.py
+/data/
