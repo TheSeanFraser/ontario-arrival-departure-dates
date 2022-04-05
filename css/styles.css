@@ -1,0 +1,248 @@
+body {
+	background-color: whitesmoke;
+	font-family: Arial, Helvetica, sans-serif;
+
+}
+
+h1 {
+  	color: black;
+	font-size: 6vw;
+}
+
+h2 {
+	text-align: center;
+}
+
+h3 {
+	color:black
+}
+
+.writing {
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+ul {
+	
+  }
+
+.navbar_ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background-color: #333;
+	border-radius: 5px;
+}
+.navbar_li {
+	
+}
+
+.location_separator {
+	
+}
+
+/* Table styles*/
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+	text-align: center;
+	padding: 10px;
+}
+
+tr:nth-child(even) {
+  background-color: rgba(150, 212, 212, 0.4);
+}
+
+th:nth-child(even),td:nth-child(even) {
+  background-color: rgba(150, 212, 212, 0.4);
+}
+
+tr:hover {background-color: #369200;}
+
+hr { 
+  display: block;
+	height: 5px;
+	width:100%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  border-style: inset;
+  border-width: 1px;
+	background: #369200;
+} 
+
+.map_area{
+	list-style-type:none;
+	overflow:auto;
+	float:left;
+	display: grid;
+	width: 80%;
+}
+
+.season_section{
+	float:left;
+	width: 80%;
+}
+
+.park_location {
+	width: 100%;
+	float:left;
+	padding-left: 15px;
+	margin-left: auto;
+	margin-right: auto;
+}
+  
+li {
+	float: left;
+}
+
+li a {
+	display: block;
+	color: white;
+	text-align: center;
+	padding: 15px 10px;
+	text-decoration: none;
+
+}
+
+li a:hover:not(.active) {
+	background-color: #111;
+}
+
+.active {
+	background-color: #369200;
+}
+
+p {
+  	color: black;
+}
+
+.speciesSelector {
+	position: relative;
+	font-family: Arial;
+	background: white;
+}
+
+.newMapButton {
+	cursor: pointer;
+}
+
+.date_map {
+	background:url(../img/loading.gif) center center no-repeat;
+}
+
+.species_map {
+	background:url(../img/loading.gif) center center no-repeat;
+}
+
+
+#chart_wrapper {
+  /* width is always 100% and always aligned to bottom */
+  width: 100%;
+  position: relative;
+  bottom: 0;
+  left: 0;
+  display: table;
+}
+
+#bar_chart {
+	/* force div to have at least 300px and exclude #right from its width */
+	overflow: hidden;
+	/*  min-width: 300px;*/
+	display: table-column; 
+	float: left;
+	background:url(../img/loading.gif) center center no-repeat;
+}
+
+#pie_chart {
+  /* show on the right; width always set, height equal to #left's height */
+  float: right;
+  height: 500px;
+  width: 49%;
+  display: table-column;
+	background:url(../img/loading.gif) center center no-repeat;
+}
+
+@media screen and (max-width: 500px) {
+  #bar_chart {
+	float: left;
+	min-width: 100%;
+  }
+  #pie_chart {
+	  float: left;
+	  min-width: 100%;
+  }
+}
+
+#column_wrapper{
+	width: 100%;
+	position: relative;
+	bottom: 0;
+  left: 0;
+  display: table;
+	overflow: auto;
+	margin: auto;
+	
+}
+
+#left_col{
+	float:left;
+	width: 45%;
+	height: :300px;
+	overflow: hidden;
+	display: table-column; 	
+}
+
+#right_col{
+	margin: 3%;
+	float:right;
+	height: :300px;
+	width: 45%;
+	text-align: center;
+	display: table-column;
+}
+
+#right_col_map{
+	margin: 3%;
+	top: 50%;
+	float:right;
+	width: 45%;
+	text-align: center;
+	display: table-column;
+}
+
+
+#owl_photo{
+	width: 80%;	
+}
+
+@media screen and (max-width: 700px) {
+  #left_col {
+	float: left;
+	min-width: 100%;
+  }
+  #right_col {
+	  float: left;
+	  min-width: 100%;
+	  margin: auto;
+  }
+	#right_col_map {
+	  float: left;
+	  min-width: 100%;
+	  margin: auto;
+  }
+}
+
+
+
+footer {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 100%;
+	color: gray;
+	float:left;
+	width: 100%;
+	text-align-last: center;
+
+}
