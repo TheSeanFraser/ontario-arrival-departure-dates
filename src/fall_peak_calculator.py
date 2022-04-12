@@ -31,6 +31,7 @@ def calculate_peak_fall_arrival(data):
 
 
 # Calculate the winter frequency of the species
+# Probably need summer frequency for fall migration
 def calculate_winter_frequency(data):
     # Create a list of the frequency values during the winter weeks
     winter_list = list(map(float, ([data[2][2], data[3][2], data[4][2],

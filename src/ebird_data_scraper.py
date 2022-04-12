@@ -14,7 +14,7 @@ url2_start_year = "2002"
 url3_end_year_tag = "&eyr="
 url4_end_year = "2002"
 url5_region_tag = "&r="
-url6_region = "CA-ON"
+url6_region = "CA-ON-TO"
 url7_species_tag = "&spp="
 url8_species = "barswa"
 url9_post = "&fmt=tsv"
@@ -34,15 +34,18 @@ def fix_species_quotes(species):
 def get_charts():
     species_list = open("../res/ont_species_6letter_likely.txt",
                         'r').read().splitlines()
+    print("Starting...")
 
     # For each year of available data, get everything
     for year in range(1952, 2022):
 
-        Path(config.data_dir + "\ontario\\" + str(year)).mkdir(parents=True, exist_ok=True)
+        Path(config.data_dir + "\\toronto\\" + str(year)).mkdir(parents=True, exist_ok=True)
+
         for species in species_list:
             species_fixed = fix_species_quotes(species)
             url2_start_year = str(year)
             url4_end_year = str(year)
+            url8_species = species_fixed
             year_url = url1 + url2_start_year + url3_end_year_tag \
                        + url4_end_year + url5_region_tag + url6_region \
                        + url7_species_tag + url8_species + url9_post
@@ -55,12 +58,13 @@ def get_charts():
             r = session.get(year_url)
 
             # Write to file
-            f = open(config.data_dir + "ontario\\" + str(year) + "\\" + str(year) + species_fixed + ".txt",
+            f = open(config.data_dir + "toronto\\" + str(year) + "\\"
+                     + str(year) + "_" + species_fixed + ".txt",
                      "w", encoding="utf-8")
             f.write(r.text)
             f.close()
 
-        print(str(year) + " complete" + str(datetime.datetime.now()))
+        print(str(year) + " complete: " + str(datetime.datetime.now()))
 
 
 get_charts()
