@@ -16,6 +16,8 @@ url7_species_tag = "&spp="
 url8_species = "barswa"
 url9_post = "&fmt=tsv"
 
+every_year = False
+
 
 # Removes quotes from species codes
 def fix_species_quotes(species):
@@ -29,12 +31,14 @@ def fix_species_quotes(species):
 
 # Downloads eBird frequency data
 def get_charts(region="Ontario"):
+    global every_year
+
     # Load the list of species we are working with
     species_list = open("../res/ont_species_6letter_likely.txt",
                         'r').read().splitlines()
 
     # Load the list of eBird regions in Ontario
-    with open(config.res_dir + "regions.json") as json_file:
+    with open(config.res_dir + "regions_complete.json") as json_file:
         regions_dict = json.load(json_file)
 
     print("Starting...")
@@ -44,15 +48,35 @@ def get_charts(region="Ontario"):
         print("Now working on: ", region, regions_dict[region])
         url6_region = regions_dict[region]
 
-        # For each year of available data, build a list of URLs to download
-        for year in range(1952, 2022):
+        if every_year:
+            # For each year of available data, build a list of URLs to download
+            for year in range(1952, 2022):
 
+                # Build the URL list to download
+                url_list = []
+                for species in species_list:
+                    species_fixed = fix_species_quotes(species)
+                    url2_start_year = str(year)
+                    url4_end_year = str(year)
+                    url8_species = species_fixed
+                    year_url = url1 + url2_start_year + url3_end_year_tag \
+                               + url4_end_year + url5_region_tag + url6_region \
+                               + url7_species_tag + url8_species + url9_post
+                    url_list.append(year_url)
+
+                # Download multiple urls with threads
+                with concurrent.futures.ThreadPoolExecutor(max_workers=20) as executor:
+                    executor.map(download_url_multi, url_list)
+
+                print(str(year) + " complete: " + str(datetime.datetime.now()))
+        else:
             # Build the URL list to download
             url_list = []
+            year = "ALL_YEARS"
             for species in species_list:
                 species_fixed = fix_species_quotes(species)
-                url2_start_year = str(year)
-                url4_end_year = str(year)
+                url2_start_year = "1952"
+                url4_end_year = "2021"
                 url8_species = species_fixed
                 year_url = url1 + url2_start_year + url3_end_year_tag \
                            + url4_end_year + url5_region_tag + url6_region \
@@ -60,7 +84,8 @@ def get_charts(region="Ontario"):
                 url_list.append(year_url)
 
             # Download multiple urls with threads
-            with concurrent.futures.ThreadPoolExecutor(max_workers=20) as executor:
+            with concurrent.futures.ThreadPoolExecutor(
+                    max_workers=20) as executor:
                 executor.map(download_url_multi, url_list)
 
             print(str(year) + " complete: " + str(datetime.datetime.now()))
@@ -68,6 +93,7 @@ def get_charts(region="Ontario"):
 
 # Downloads URL from eBird
 def download_url_multi(url):
+    global every_year
     # Get data from web
     session = req.Session()
     session.headers.update({
@@ -75,12 +101,20 @@ def download_url_multi(url):
 
     r = session.get(url)
 
-    # Use RegEx to extract the year, region, and species for the filepath
-    year = re.search("byr=(....)&", url).group(1)
-    region = re.search("r=(\D*)&s", url).group(1)
-    species = re.search("spp=(\D*)&", url).group(1)
-    file_path = config.data_dir + region + "\\" + str(year) + "\\"\
-                                 + str(year) + "_" + species + ".txt"
+    if every_year:
+        # Use RegEx to extract the year, region, and species for the filepath
+        year = re.search("byr=(....)&", url).group(1)
+        region = re.search("r=(\D*)&s", url).group(1)
+        species = re.search("spp=(\D*)&", url).group(1)
+        file_path = config.data_dir + region + "\\" + str(year) + "\\"\
+                                     + str(year) + "_" + species + ".txt"
+    else:
+        # Use RegEx to extract the year, region, and species for the filepath
+        year = "ALL_YEARS"
+        region = re.search("r=(\D*)&s", url).group(1)
+        species = re.search("spp=(\D*)&", url).group(1)
+        file_path = config.data_dir + region + "\\" + year + "\\"\
+                                     + year + "_" + species + ".txt"
 
     # Make sure file path exists first
     Path(config.data_dir + "\\" + region + "\\" + str(year)).mkdir(parents=True,
