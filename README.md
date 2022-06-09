@@ -1,4 +1,4 @@
-# Ontario Arrival Departure Dates
+# Ontario Arrival & Departure Dates
 Calculating mass bird migration dates for all regions Ontario based on eBird data.
 
 ## Method
