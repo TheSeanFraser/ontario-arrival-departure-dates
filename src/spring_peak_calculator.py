@@ -246,8 +246,8 @@ def bulk_calculate_spring_mass_arrival():
                     else:
                         all_data[str(data[1][2])] = [date_string]
 
-        all_data_file_path = config.data_dir + "\\ALL_DATA\\" + region + "_ALL_DATA.csv"
-        pd.DataFrame.from_dict(data=all_data, orient='index').to_csv(all_data_file_path, header=False)
+        spring_peaks_path = config.data_dir + "\\region_spring_peaks\\" + region + "_spring_peaks.csv"
+        pd.DataFrame.from_dict(data=all_data, orient='index').to_csv(spring_peaks_path, header=False)
 
 
 # calculate_spring_mass_arrival()
