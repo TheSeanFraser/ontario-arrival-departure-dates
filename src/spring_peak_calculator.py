@@ -1,3 +1,4 @@
+import json
 import os
 import pathlib
 from datetime import datetime
@@ -168,7 +169,86 @@ def calculate_spring_mass_arrival():
     #     output_file.close()
 
     # print(all_data)
-    pd.DataFrame.from_dict(data=all_data, orient='index').to_csv("toronto_all_data.csv", header=False)
+    pd.DataFrame.from_dict(data=all_data, orient='index').to_csv(
+        "../data/toronto_all_data.csv", header=False)
 
 
-calculate_spring_mass_arrival()
+# Calculate the date of the mass spring arrivals
+def bulk_calculate_spring_mass_arrival():
+    # Load the list of eBird regions in Ontario
+    with open("regions_complete.json") as json_file:
+        regions_dict = json.load(json_file)
+
+    for region in regions_dict:
+        all_data = {
+            "Year": []
+        }
+        print("Starting " + region)
+        directory = config.proj_path + "data\\" + regions_dict[region] + "\\"
+
+        for subdir, dirs, files in os.walk(directory):
+            path = pathlib.PurePath(subdir)
+            year = path.name
+            if len(year) == 4:
+                print(year)
+                all_data["Year"] = all_data["Year"] + [year]
+                for file in files:
+                    f = os.path.join(subdir, file)
+                    data = pd.read_csv(f, delimiter="\t", header=None)
+                    # Dates start at column 2, frequency is row 2
+                    # Full species name at [1][2]
+
+                    spring_peak_freq, peak_spring_date_index = calculate_peak_spring_arrival(
+                        data)
+                    winter_freq = calculate_winter_frequency(data)
+                    mass_freq = (M_factor * (
+                                spring_peak_freq - winter_freq)) + winter_freq
+
+                    # Create a list to store all frequency numbers in each day of year
+                    calendar_list = pd.Series([np.nan] * 365)
+
+                    # Find the day of the year with the peak spring frequency week
+                    peak_day = int(
+                        week_day_of_year_list[int(peak_spring_date_index)])
+
+                    # Enter the frequency data into the calendar list
+                    for x in range(len(week_day_of_year_list)):
+                        calendar_list[week_day_of_year_list[x]] = float(
+                            data[x + 2][2])
+
+                    # Interpolate the frequency data for each day of year, not just week
+                    # start day. This calculates all the "in-between" frequencies needed
+                    # to find the exact day with the matching frequency
+                    calendar_list = calendar_list.interpolate()
+
+                    # Find the mass arrival day based on peak day. Starts at the peak and
+                    # goes backwards until it finds a matching frequency
+                    mass_arrival_day = 1
+                    for i in range(peak_day, 0, -1):
+                        # If the mass frequency is greater than the frequency on the
+                        # selected day, that means we have the right day because all others
+                        # have been higher than the mass frequency.
+                        if calendar_list[i] - mass_freq < 0:
+                            mass_arrival_day = i
+                            break
+
+                    # Convert the day to a string, then create a datetime object for the
+                    # date for easier conversion.
+                    mass_arrival_date = str(mass_arrival_day)
+                    mass_arrival_date.rjust(3 + len(mass_arrival_date), '0')
+                    year = "2022"
+                    date = datetime.strptime(year + "-" + mass_arrival_date,
+                                             "%Y-%j").strftime("%Y-%m-%d")
+                    date_string = str(date)
+
+                    if str(data[1][2]) in all_data.keys():
+                        all_data[str(data[1][2])] = all_data[str(data[1][2])] + [date_string]
+                    else:
+                        all_data[str(data[1][2])] = [date_string]
+
+        all_data_file_path = config.data_dir + "\\ALL_DATA\\" + region + "_ALL_DATA.csv"
+        pd.DataFrame.from_dict(data=all_data, orient='index').to_csv(all_data_file_path, header=False)
+
+
+# calculate_spring_mass_arrival()
+bulk_calculate_spring_mass_arrival()

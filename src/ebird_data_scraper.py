@@ -34,7 +34,7 @@ def get_charts(region="Ontario"):
                         'r').read().splitlines()
 
     # Load the list of eBird regions in Ontario
-    with open("regions.json") as json_file:
+    with open(config.res_dir + "regions.json") as json_file:
         regions_dict = json.load(json_file)
 
     print("Starting...")
@@ -60,7 +60,7 @@ def get_charts(region="Ontario"):
                 url_list.append(year_url)
 
             # Download multiple urls with threads
-            with concurrent.futures.ThreadPoolExecutor(max_workers=12) as executor:
+            with concurrent.futures.ThreadPoolExecutor(max_workers=20) as executor:
                 executor.map(download_url_multi, url_list)
 
             print(str(year) + " complete: " + str(datetime.datetime.now()))
@@ -91,4 +91,37 @@ def download_url_multi(url):
     f.close()
 
 
+# Download one year for one region
+# Useful when PC falls asleep during downloading
+def download_one(region, year):
+    # Load the list of species we are working with
+    species_list = open("../res/ont_species_6letter_likely.txt",
+                        'r').read().splitlines()
+    print("Starting...")
+
+    url6_region = region
+
+    # Build the URL list to download
+    url_list = []
+
+    for species in species_list:
+        species_fixed = fix_species_quotes(species)
+
+        url2_start_year = str(year)
+        url4_end_year = str(year)
+        url8_species = species_fixed
+        year_url = url1 + url2_start_year + url3_end_year_tag \
+                   + url4_end_year + url5_region_tag + url6_region \
+                   + url7_species_tag + url8_species + url9_post
+        url_list.append(year_url)
+
+    # Download multiple urls with threads
+    with concurrent.futures.ThreadPoolExecutor(max_workers=12) as executor:
+        executor.map(download_url_multi, url_list)
+
+    print(str(year) + " complete: " + str(datetime.datetime.now()))
+
+
 get_charts()
+
+# download_one("CA-ON-PE", 1999)

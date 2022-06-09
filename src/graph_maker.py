@@ -4,7 +4,7 @@ import config
 
 def make_graphs():
     print("starting graphs")
-    df = pd.read_csv("toronto_all_data.csv")
+    df = pd.read_csv("../data/toronto_all_data.csv")
     df.set_index("Year", inplace=True)
     print(df.loc["Snowy Owl"])
 
