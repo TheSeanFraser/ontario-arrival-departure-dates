@@ -16,7 +16,7 @@ url7_species_tag = "&spp="
 url8_species = "barswa"
 url9_post = "&fmt=tsv"
 
-every_year = False
+every_year = True
 
 
 # Removes quotes from species codes
@@ -33,8 +33,13 @@ def fix_species_quotes(species):
 def get_charts(region="Ontario"):
     global every_year
 
+    ######## Commented out to fix bug, replaced by line below for now
+    # # Load the list of species we are working with
+    # species_list = open("../res/ont_species_6letter_likely.txt",
+    #                     'r').read().splitlines()
+
     # Load the list of species we are working with
-    species_list = open("../res/ont_species_6letter_likely.txt",
+    species_list = open("../res/ont_species_6letter_likely_wDIGITS.txt",
                         'r').read().splitlines()
 
     # Load the list of eBird regions in Ontario
@@ -72,10 +77,10 @@ def get_charts(region="Ontario"):
         else:
             # Build the URL list to download
             url_list = []
-            year = "ALL_YEARS"
+            year = "20_YEARS"
             for species in species_list:
                 species_fixed = fix_species_quotes(species)
-                url2_start_year = "1952"
+                url2_start_year = "2001"
                 url4_end_year = "2021"
                 url8_species = species_fixed
                 year_url = url1 + url2_start_year + url3_end_year_tag \
@@ -101,24 +106,26 @@ def download_url_multi(url):
 
     r = session.get(url)
 
+    file_path = ""
+
     if every_year:
         # Use RegEx to extract the year, region, and species for the filepath
         year = re.search("byr=(....)&", url).group(1)
         region = re.search("r=(\D*)&s", url).group(1)
-        species = re.search("spp=(\D*)&", url).group(1)
-        file_path = config.data_dir + region + "\\" + str(year) + "\\"\
-                                     + str(year) + "_" + species + ".txt"
+        species = re.search("spp=(.*)&fmt", url).group(1)
+        file_path = config.regions_data_dir + region + "\\" + str(year) + "\\" \
+                    + str(year) + "_" + species + ".txt"
     else:
         # Use RegEx to extract the year, region, and species for the filepath
-        year = "ALL_YEARS"
+        year = "20_YEARS"
         region = re.search("r=(\D*)&s", url).group(1)
-        species = re.search("spp=(\D*)&", url).group(1)
-        file_path = config.data_dir + region + "\\" + year + "\\"\
-                                     + year + "_" + species + ".txt"
+        species = re.search("spp=(.*)&fmt", url).group(1)
+        file_path = config.regions_data_dir + region + "\\" + year + "\\" \
+                    + year + "_" + species + ".txt"
 
     # Make sure file path exists first
-    Path(config.data_dir + "\\" + region + "\\" + str(year)).mkdir(parents=True,
-                                                                   exist_ok=True)
+    Path(config.regions_data_dir + "\\" + region + "\\" + str(year)).mkdir(parents=True,
+                                                                           exist_ok=True)
     # Write to file
     f = open(file_path, "w", encoding="utf-8")
     f.write(r.text)
