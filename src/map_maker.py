@@ -64,7 +64,7 @@ def make_maps():
 
         plt.subplots_adjust(left=-0.1)
         # plt.tight_layout()
-        fig.savefig(config.proj_path + "maps\\spring\\" + species + ".png", dpi=100)
+        fig.savefig(config.proj_path + "media\\maps\\spring\\" + species + ".png", dpi=100)
         plt.close()
 
 
@@ -111,7 +111,7 @@ def make_map_multi(species_data_file):
                     edgecolor='1',
                     legend=True, )
     fig.savefig(
-        config.proj_path + "maps\\spring\\" + species + " spring map.png",
+        config.proj_path + "media\\maps\\spring\\" + species + " spring map.png",
         dpi=100)
     plt.close()
 

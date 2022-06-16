@@ -104,7 +104,7 @@ def make_all_species_peaks_per_region():
 
 def make_html_table_for_each_region():
     directory = config.regions_data_dir + "region_spring_peaks\\20_YEARS\\"
-    html_dir = config.regions_data_dir + "region_spring_peaks\\20_YEARS_HTML\\"
+    list_dir = config.regions_data_dir + "media\\lists\\20_YEARS\\"
 
     for filename in os.listdir(directory):
         f = os.path.join(directory, filename)
@@ -127,7 +127,7 @@ def make_html_table_for_each_region():
         data.columns = ["Species", "Date"]
         data = data[["Date", "Species"]]
         # Save to html
-        data.to_html(html_dir + region + ".html",index=False)
+        data.to_html(list_dir + region + ".html",index=False)
 
 # build_species_names_list_from_6_letter_codes()
 # build_species_peaks()
