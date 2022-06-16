@@ -138,32 +138,6 @@ p {
 }
 
 
-#chart_wrapper {
-  /* width is always 100% and always aligned to bottom */
-  width: 100%;
-  position: relative;
-  bottom: 0;
-  left: 0;
-  display: table;
-}
-
-#bar_chart {
-	/* force div to have at least 300px and exclude #right from its width */
-	overflow: hidden;
-	/*  min-width: 300px;*/
-	display: table-column; 
-	float: left;
-	background:url(../img/loading.gif) center center no-repeat;
-}
-
-#pie_chart {
-  /* show on the right; width always set, height equal to #left's height */
-  float: right;
-  height: 500px;
-  width: 49%;
-  display: table-column;
-	background:url(../img/loading.gif) center center no-repeat;
-}
 
 @media screen and (max-width: 500px) {
   #bar_chart {

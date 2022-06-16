@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/styles.css">
-    <link rel="import" href="maps/all_birds_map.html">
+    <script src="js/regionSelectorHandler.js" ></script>
 </head>
 
 <body>
@@ -19,18 +19,40 @@
 <ul class="navbar_ul">
     <li class="navbar_li"><a href="index.html">Home</a></li>
     <li class="navbar_li"><a class="active" href="regions.html">Regional Timelines</a></li>
+    <li class="navbar_li"><a href="species.html">Species Timing Maps</a></li>
     <li class="navbar_li" style="float:right"><a href="about.html">About</a></li>
 </ul>
 
 <div class="writing">
     <h3>Regional Timelines</h3>
+    <p>Below is a list of "mass arrival" dates of each species to the selected region. The method to calculate these dates is based on <a href="http://mikeburrell.blogspot.com/2012/04/guide-to-spring-arrival-dates-in.html">Mike
+        Burrell's blog post</a>. Instead of using all
+        available eBird data, only the past 20 years were used to have a more accurate prediction
+        based on current circumstances.
+        </p>
 
-    <p>Only Toronto is available at the moment on the Home page. Check back for more in the future.</p>
+    <!-- Region Selector-->
+    <label for="species">Select a region:</label>
+    <select name="date" id="regionSelector"><option>Toronto</option></select>
+    <input type="button" class="newRegionButton" id="selectRegionButton" value="Display Data">
+    <div class="date_list_holder">
+        <table class="table table-bordered table-hover table-condensed">
+            <thead>
+            <tr>
+                <th title="Field #1">20 Year AVG</th>
+                <th title="Field #2">Species</th>
+            </tr>
+            </thead>
+            <tbody id="date_list_body">
 
+            </tbody>
+        </table>
+    </div>
 </div>
 
 </body>
 <footer>
+    <script src="js/displayNewRegionData.js" ></script>
     <div>Sean Fraser 🦆 2022</div>
 </footer>
 </html>

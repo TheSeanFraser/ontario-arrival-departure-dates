@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<html>
+<head>
+    <title>Ontario Bird Migration Timeline</title>
+    <link rel="icon" type="image/png" href="img/icon.png"/>
+    <meta name="author" content="Sean Fraser">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="import" href="maps/all_birds_map.html">
+    <script src="js/speciesSelectorHandler.js" ></script>
+</head>
+
+<body>
+<div>
+    <h2>Ontario Bird Migration Timeline</h2>
+</div>
+<!--Navigation Bar-->
+<ul class="navbar_ul">
+    <li class="navbar_li"><a href="index.html">Home</a></li>
+    <li class="navbar_li"><a href="regions.html">Regional Timelines</a></li>
+    <li class="navbar_li"><a class="active" href="species.html">Species Timing Maps</a></li>
+    <li class="navbar_li" style="float:right"><a href="about.html">About</a></li>
+</ul>
+
+<div class="writing">
+    <h3>Regional Timelines</h3>
+
+    <!-- Species Selector-->
+    <label for="species">Select a species:</label>
+    <select name="species" id="speciesSelector"><option>Black-and-white Warbler</option></select>
+    <input type="button" class="newSpeciesButton" id="selectSpeciesButton" value="Display Map">
+</div>
+
+</body>
+<footer>
+    <div>Sean Fraser 🦆 2022</div>
+</footer>
+</html>
