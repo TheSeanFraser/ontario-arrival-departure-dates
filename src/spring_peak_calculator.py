@@ -246,7 +246,7 @@ def bulk_calculate_spring_mass_arrival():
                     else:
                         all_data[str(data[1][2])] = [date_string]
 
-        spring_peaks_path = config.data_dir + "\\region_spring_peaks\\" + region + "_spring_peaks.csv"
+        spring_peaks_path = config.regions_data_dir + "\\region_spring_peaks\\" + region + "_spring_peaks.csv"
         pd.DataFrame.from_dict(data=all_data, orient='index').to_csv(spring_peaks_path, header=False)
         print(region + " complete")
 
@@ -261,10 +261,8 @@ def bulk_20_years_calculate_spring_mass_arrival():
             "Year": []
         }
         print("Starting " + region)
-        directory = config.proj_path + "data\\" + regions_dict[region] \
+        directory = config.regions_data_dir + regions_dict[region] \
                     + "\\20_YEARS\\"
-
-
 
         year = "TWENTY"
         for subdir, dirs, files in os.walk(directory):
@@ -327,7 +325,7 @@ def bulk_20_years_calculate_spring_mass_arrival():
                     else:
                         all_data[str(data[1][2])] = [date_string]
 
-        spring_peaks_path = config.data_dir + "\\region_spring_peaks\\20_YEARS\\" + regions_dict[region] + "_spring_peaks.csv"
+        spring_peaks_path = config.regions_data_dir + "\\region_spring_peaks\\20_YEARS\\" + regions_dict[region] + "_spring_peaks.csv"
         pd.DataFrame.from_dict(data=all_data, orient='index').to_csv(spring_peaks_path, header=False)
         print(region + " complete")
 
