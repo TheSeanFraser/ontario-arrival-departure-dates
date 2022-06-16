@@ -22,13 +22,16 @@ def make_maps():
         single_data = pd.read_csv(directory + filename, header=1)
         species = re.search("(.*).csv", filename).group(1)
         print("Making map for: " + species)
-        # Modify date string to be in the proper format for the map
-        single_data[species] = pd.to_datetime(single_data[species], format="%Y-%m-%d")
-        single_data[species] = pd.to_datetime(single_data[species]).dt.strftime('%b %d')
 
         # Merges the dataframes with the matching region names column
         merged = ontario_shape.set_index("CDNAME").join(
             single_data.set_index("Unnamed: 0"))
+
+        # Sort the date and change to easy format
+        merged.sort_values(species, inplace=True)
+        merged[species] = pd.to_datetime(merged[species], format="%Y-%m-%d")
+        merged[species] = pd.to_datetime(merged[species]).dt.strftime('%#m-%d')
+
 
         # Define the map plot
         fig, ax = plt.subplots(1, figsize=(12, 8))
@@ -36,10 +39,15 @@ def make_maps():
         ax.set_title(species + ' Spring Mass Arrival Dates in Ontario',
                      fontdict={'fontsize': '20', 'fontweight': '3'})
 
+        # Add a watermark
+        ax.text(0, 0, "Sean Fraser - 2022", transform=ax.transAxes,
+            fontsize=10, color='gray', alpha=0.5,
+            ha='left', va='bottom')
+
         # "Missing values" will not plot anything if there are no missing values
         # so there needs to be a check
         if merged[str(species)].isnull().values.any():
-            merged.plot(column=str(species),
+            merged.plot(column=species,
                         cmap=matplotlib.cm.get_cmap('viridis_r'),
                         linewidth=0.9,
                         ax=ax,
@@ -73,47 +81,6 @@ def load_ontario_shape():
     ontario_shape = gpd.read_file(config.res_dir + "ontario_2011.json")
 
     return ontario_shape
-
-
-def make_map_multi(species_data_file):
-    directory = config.species_data_dir + "20_YEARS_SPRING_PEAKS\\"
-    single_data = pd.read_csv(directory + str(species_data_file), header=0)
-    number = re.search("_(\d*)", species_data_file).group(1)
-    species = re.search("(.*)_", species_data_file).group(1)
-
-    # Merges the dataframes with the matching region names column
-    merged = ontario_shape.set_index("CDNAME").join(
-        single_data.set_index("Unnamed: 0"))
-
-    # Define the map plot
-    fig, ax = plt.subplots(1, figsize=(20, 20))
-    ax.axis('off')
-    ax.set_title(species + ' Spring Mass Arrival Dates Through Ontario',
-                 fontdict={'fontsize': '25', 'fontweight': '3'})
-
-    # "Missing values" will not plot anything if there are no missing values
-    # so there needs to be a check
-    if merged[str(number)].isnull().values.any():
-        # merged[str(number)] = merged[str(number)].astype(str)
-        merged.plot(column=str(number),
-                    cmap='Greens',
-                    linewidth=0.9,
-                    ax=ax,
-                    edgecolor='1',
-                    legend=True, missing_kwds={
-                "color": "lightgrey",
-                "label": "Missing values", }, )
-    else:
-        merged.plot(column=str(number),
-                    cmap='Greens',
-                    linewidth=0.9,
-                    ax=ax,
-                    edgecolor='1',
-                    legend=True, )
-    fig.savefig(
-        config.proj_path + "media\\maps\\spring\\" + species + " spring map.png",
-        dpi=100)
-    plt.close()
 
 
 make_maps()
