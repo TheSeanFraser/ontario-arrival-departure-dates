@@ -1,7 +1,7 @@
 var regionListResponse;
 var torontoListResponse;
 
-fetch('https://theseanfraser.github.io/ontario-arrival-departure-dates/res/regions_complete.json')
+fetch('https://theseanfraser.github.io/ontario-arrival-departure-dates/res/species_to_code.json')
 	.then(response => response.json())
     .then(text=> regionListResponse = text)
     .then((response) => {
@@ -11,7 +11,7 @@ fetch('https://theseanfraser.github.io/ontario-arrival-departure-dates/res/regio
 
 function updateSelectorList()
 {
-    var selector = document.getElementById("regionSelector");
+    var selector = document.getElementById("speciesSelector");
 
 	for(var i = 0; i < Object.keys(regionListResponse).length; i++){
 	    var opt = Object.keys(regionListResponse)[i];

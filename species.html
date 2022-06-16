@@ -25,16 +25,26 @@
 </ul>
 
 <div class="writing">
-    <h3>Regional Timelines</h3>
+    <h3>Species Timing</h3>
+    <p>These maps show the speed at which each species migrates through Ontario.</p>
 
     <!-- Species Selector-->
     <label for="species">Select a species:</label>
-    <select name="species" id="speciesSelector"><option>Black-and-white Warbler</option></select>
+    <select name="species" id="speciesSelector">
+        <option style="display: none">SELECT SPECIES</option>
+    </select>
     <input type="button" class="newSpeciesButton" id="selectSpeciesButton" value="Display Map">
+    <div>
+        <img id="map_img" src="https://theseanfraser.github.io/ontario-arrival-departure-dates/media/maps/spring/Black-and-white%20Warbler.png">
+    </div>
+    <p>Ontario Map Source: Statistics Canada, Boundary Files, Reference Guide, Census year 2011 , 2022-06-08. Reproduced and distributed on
+an “as is” basis with the permission of Statistics Canada.</p>
+
 </div>
 
 </body>
 <footer>
+    <script src="js/displayNewSpeciesData.js" ></script>
     <div>Sean Fraser 🦆 2022</div>
 </footer>
 </html>
