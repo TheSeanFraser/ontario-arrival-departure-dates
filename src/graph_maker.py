@@ -11,7 +11,7 @@ def make_graphs():
     for i, row in df.iterrows():
         print(row)
         fig = px.line(row, y=row.name, title="Test")
-        fig.write_html(config.data_dir + "\\toronto\\graphs\\" + row.name + "_test.html")
+        fig.write_html(config.regions_data_dir + "\\toronto\\graphs\\" + row.name + "_test.html")
 
     df.to_html("toronto_data.html")
 
