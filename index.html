@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/styles.css">
-    <link rel="import" href="maps/all_birds_map.html">
+    <script src="js/regionSelectorHandler.js" ></script>
 </head>
 
 <body>
@@ -17,27 +17,62 @@
 </div>
 <!--Navigation Bar-->
 <ul class="navbar_ul">
-    <li class="navbar_li"><a class="active" href="#home">Home</a></li>
-    <li class="navbar_li"><a href="regions.html">Regional Timelines</a></li>
+    <li class="navbar_li"><a class="active" href="index.html">Regional Timelines</a></li>
     <li class="navbar_li"><a href="species.html">Species Timing Maps</a></li>
     <li class="navbar_li" style="float:right"><a href="about.html">About</a></li>
 </ul>
 
 <div class="writing">
-    <h3>Migration Timelines</h3>
-    <p>This project is intended to predict when the highest number of each species arrives in each region of Ontario. The method to calculate these dates is based on <a href="http://mikeburrell.blogspot.com/2012/04/guide-to-spring-arrival-dates-in.html">Mike
-        Burrell's blog post</a>. Instead of using eBird data from every available year, only the past 20 years were used to have a more accurate prediction based on current circumstances.</p>
-    <p>In the future, fall migration will be included - as well as some graphs for each species to show how their migration dates have changed from the past.</p>
+    <h3>Regional Timelines</h3>
+    <p>Visit the <a href="about.html">About page</a> to learn how these dates were calculated.</p>
+    <p>Below is a list of "mass arrival" dates of each species to the selected region.</p>
 
-    <p>All bird data is from eBird.</p>
-    <p><i>eBird. 2021. eBird: An online database of bird distribution and abundance [web application].
-        eBird, Cornell Lab of Ornithology, Ithaca, New York. Available: http://www.ebird.org.
-        (Accessed: April 5, 2022).</i></p>
+    <!-- Region Selector-->
+    <label for="species">Select a region:</label>
+    <select name="date" id="regionSelector">
+        <option style="display: none">Toronto</option>
+    </select>
+    <input type="button" class="newRegionButton" id="selectRegionButton" value="Display Data">
+    <div>&nbsp</div>
+    <div class="date_list_holder">
+        <div class="column" id="left_col">
+            <table class="table table-bordered table-hover table-condensed">
+                <thead>
+                <tr>
+                    <th colspan="2">Spring Mass Arrivals</th>
+                </tr>
+                <tr>
+                    <th title="Field #1">20 Year AVG</th>
+                    <th title="Field #2">Species</th>
+                </tr>
+                </thead>
+                <tbody id="spring_date_list_body">
+
+                </tbody>
+            </table>
+        </div>
+        <div class="column" id="right_col">
+             <table class="table table-bordered table-hover table-condensed">
+                <thead>
+                <tr>
+                    <th colspan="2">Fall Mass Arrivals</th>
+                </tr>
+                <tr>
+                    <th title="Field #1">20 Year AVG</th>
+                    <th title="Field #2">Species</th>
+                </tr>
+                </thead>
+                <tbody id="fall_date_list_body">
+
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
-
 
 </body>
 <footer>
+    <script src="js/displayNewRegionData.js" ></script>
     <div>Sean Fraser 🦆 2022</div>
 </footer>
 </html>

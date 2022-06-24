@@ -10,7 +10,7 @@ selectSpeciesButton.onclick = function() {
 
     var spring_map_img = document.getElementById("spring_map_img");
     var fall_map_img = document.getElementById("fall_map_img");
-    
+
     spring_map_img.src = spring_path + species + ".png";
     fall_map_img.src = fall_path + species + ".png";
 

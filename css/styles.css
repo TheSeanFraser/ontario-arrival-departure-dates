@@ -1,7 +1,6 @@
 body {
 	background-color: white;
 	font-family: Arial, Helvetica, sans-serif;
-
 }
 
 h1 {
@@ -24,7 +23,7 @@ h3 {
 
 ul {
 	
-  }
+}
 
 .navbar_ul {
 	list-style-type: none;
@@ -35,10 +34,6 @@ ul {
 	border-radius: 5px;
 }
 .navbar_li {
-	
-}
-
-.location_separator {
 	
 }
 
@@ -60,40 +55,6 @@ th:nth-child(even),td:nth-child(even) {
 
 tr:hover {background-color: #369200;}
 
-hr { 
-  display: block;
-	height: 5px;
-	width:100%;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  margin-left: auto;
-  margin-right: auto;
-  border-style: inset;
-  border-width: 1px;
-	background: #369200;
-} 
-
-.map_area{
-	list-style-type:none;
-	overflow:auto;
-	float:left;
-	display: grid;
-	width: 80%;
-}
-
-.season_section{
-	float:left;
-	width: 80%;
-}
-
-.park_location {
-	width: 100%;
-	float:left;
-	padding-left: 15px;
-	margin-left: auto;
-	margin-right: auto;
-}
-  
 li {
 	float: left;
 }
@@ -129,25 +90,8 @@ p {
 	cursor: pointer;
 }
 
-.date_map {
-	background:url(../img/loading.gif) center center no-repeat;
-}
-
-.species_map {
-	background:url(../img/loading.gif) center center no-repeat;
-}
-
-
-
 @media screen and (max-width: 500px) {
-  #bar_chart {
-	float: left;
-	min-width: 100%;
-  }
-  #pie_chart {
-	  float: left;
-	  min-width: 100%;
-  }
+
 }
 
 #column_wrapper{
@@ -162,53 +106,25 @@ p {
 }
 
 .date_list_holder.after{
-      content: "";
-  display: table;
-  clear: both;
+    content: "";
+    display: table;
+    clear: both;
+    margin:auto;
 }
 caption{
     font-size:25px;
 }
+
 .column{
     float:left;
     width:50%;
-     justify-content: center;
-  align-content: center;
-
+    margin:auto;
+    display:flex;
+    justify-content: center;
+    align-items: center;
 }
 
-#left_col{
-	float:left;
-	width: 45%;
-	height: :300px;
-	overflow: hidden;
-	display: table-column; 	
-}
-
-#right_col{
-	margin: 3%;
-	float:right;
-	height: :300px;
-	width: 45%;
-	text-align: center;
-	display: table-column;
-}
-
-#right_col_map{
-	margin: 3%;
-	top: 50%;
-	float:right;
-	width: 45%;
-	text-align: center;
-	display: table-column;
-}
-
-
-#owl_photo{
-	width: 80%;	
-}
-
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 800px) {
   #left_col {
 	float: left;
 	min-width: 100%;
@@ -224,8 +140,6 @@ caption{
 	  margin: auto;
   }
 }
-
-
 
 footer {
 	font-family: Arial, Helvetica, sans-serif;
