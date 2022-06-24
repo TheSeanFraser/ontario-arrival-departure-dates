@@ -35,7 +35,7 @@ def calculate_peak_fall_arrival(data):
     return peak_fall_frequency, peak_fall_date_index
 
 
-# Calculate the summer frequency of the species
+# Calculate the summer frequency of the species. Used as a baseline level
 def calculate_summer_frequency(data):
     # Create a list of the frequency values during the summer weeks
     summer_list = list(map(float, ([data[23][2], data[24][2], data[25][2],
@@ -49,60 +49,6 @@ def calculate_summer_frequency(data):
     summer_freq = (summer_max + summer_avg) / 2
 
     return summer_freq
-
-
-# Calculate the date of the mass fall arrivals
-def calculate_fall_mass_arrival():
-    directory = config.proj_path + "data\ontario\\20_YEARS"
-    for file in os.listdir(directory):
-        f = os.path.join(directory, file)
-        data = pd.read_csv(f, delimiter="\t", header=None)
-        # Dates start at column 2, frequency is row 2
-        # Full species name at [1][2]
-
-        fall_peak_freq, peak_fall_date_index = calculate_peak_fall_arrival(data)
-        summer_freq = calculate_summer_frequency(data)
-        mass_freq = (M_factor * (fall_peak_freq - summer_freq)) + summer_freq
-
-        # Create a list to store all frequency numbers in each day of year
-        calendar_list = pd.Series([np.nan] * 365)
-
-        # Find the day of the year with the peak fall frequency week
-        peak_day = int(week_day_of_year_list[int(peak_fall_date_index)])
-
-        # Enter the frequency data into the calendar list
-        for x in range(len(week_day_of_year_list)):
-            calendar_list[week_day_of_year_list[x]] = float(data[x + 2][2])
-
-        # Interpolate the frequency data for each day of year, not just week
-        # start day. This calculates all the "in-between" frequencies needed
-        # to find the exact day with the matching frequency
-        calendar_list = calendar_list.interpolate()
-
-        # Find the mass arrival day based on peak day. Starts at the peak and
-        # goes backwards until it finds a matching frequency
-        mass_arrival_day = 1
-        for i in range(peak_day, 0, -1):
-            # If the mass frequency is greater than the frequency on the
-            # selected day, that means we have the right day because all others
-            # have been higher than the mass frequency.
-            if calendar_list[i] - mass_freq < 0:
-                mass_arrival_day = i
-                break
-
-        # Convert the day to a string, then create a datetime object for the
-        # date for easier conversion.
-        mass_arrival_date = str(mass_arrival_day)
-        mass_arrival_date.rjust(3 + len(mass_arrival_date), '0')
-        year = "2022"
-        date = datetime.strptime(year + "-" + mass_arrival_date,
-                                 "%Y-%j").strftime("%m-%d")
-        date_string = str(date)
-
-        output_file = open(config.proj_path +
-                           "data\ontario\\20_YEARS\species_departures.txt", "a")
-        output_file.write(data[1][2] + ", " + date_string + "\n")
-        output_file.close()
 
 
 # Calculate the date of the mass fall arrivals
@@ -184,5 +130,4 @@ def bulk_20_years_calculate_fall_mass_arrival():
         print(region + " complete")
 
 
-# calculate_fall_mass_arrival()
 bulk_20_years_calculate_fall_mass_arrival()
