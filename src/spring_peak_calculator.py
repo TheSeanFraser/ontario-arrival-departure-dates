@@ -31,6 +31,8 @@ def calculate_peak_spring_arrival(data):
                                     data[22][2]])))
     peak_spring_frequency = max(spring_list)
     # +8 to make up for the rest of the year not in this list
+    # First two columns are useless, column index should start at 2
+    # Then add 8 to include the previous weeks of the year in the overall index
     peak_spring_date_index = spring_list.index(peak_spring_frequency) + 8
 
     return peak_spring_frequency, peak_spring_date_index

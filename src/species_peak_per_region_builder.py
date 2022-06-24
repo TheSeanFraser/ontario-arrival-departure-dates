@@ -7,6 +7,7 @@ import pandas as pd
 import config
 
 
+# Utility to convert 6 letter eBird code to full species name
 def build_species_names_list_from_6_letter_codes():
     species_to_code_dict = {}
     code_to_species_dict = {}
@@ -33,6 +34,7 @@ def build_species_names_list_from_6_letter_codes():
         json.dump(code_to_species_dict, fp)
 
 
+# Creates a list of peak dates for each region for every species
 def build_species_peaks():
     # Load the list of species we are working with
     with open(config.res_dir +"species_to_code.json") as json_file:
@@ -62,7 +64,7 @@ def build_species_peaks():
     # How to set a single value
     # df.loc["Acadian Flycatcher", "Algoma" ] = "AAAA"
 
-    directory = config.regions_data_dir + "\\region_spring_peaks\\20_YEARS\\"
+    directory = config.regions_data_dir + "\\region_fall_peaks\\20_YEARS\\"
     for subdir, dirs, files in os.walk(directory):
         path = pathlib.PurePath(subdir)
         year = path.name
@@ -85,30 +87,31 @@ def build_species_peaks():
                         df2.loc[cur_region, species] = date
     print(df)
     df.to_csv(
-        config.species_data_dir + "20_YEARS_peak_dates_Region_index.csv")
+        config.species_data_dir + "20_YEARS_fall_peak_dates_Region_index.csv")
     df2.to_csv(
-        config.species_data_dir + "20_YEARS_peak_dates_Species_index.csv")
+        config.species_data_dir + "20_YEARS_fall_peak_dates_Species_index.csv")
 
 
+# Create a file to store the peaks for each species as a list for every region
 def make_all_species_peaks_per_region():
-    data = pd.read_csv(config.species_data_dir + "20_YEARS_peak_dates_Region_index.csv")
+    data = pd.read_csv(config.species_data_dir + "20_YEARS_fall_peak_dates_Region_index.csv")
 
     # Save species data separately
-    for i in range(303):
+    for i in range(len(data.index)):
         df = data.loc[i]
         print(data.loc[i][0])
         species_name = data.loc[i][0]
         if species_name != "Species":
-            df.to_csv(config.species_data_dir +"20_YEARS_SPRING_PEAKS\\" + species_name + ".csv")
+            if not  "\\" in species_name:
+                df.to_csv(config.species_data_dir +"20_YEARS_FALL_PEAKS\\" + species_name + ".csv")
 
 
-def make_html_table_for_each_region():
-    directory = config.regions_data_dir + "region_spring_peaks\\20_YEARS\\"
-    list_dir = config.proj_path + "media\\lists\\20_YEARS\\"
+def make_json_table_for_each_region():
+    directory = config.regions_data_dir + "region_fall_peaks\\20_YEARS\\"
+    list_dir = config.proj_path + "media\\lists\\20_YEARS\\fall\\"
 
     for filename in os.listdir(directory):
         f = os.path.join(directory, filename)
-        print(filename)
         region = re.search("(CA-ON-..)",filename).group(1)
         data = pd.read_csv(f)
 
@@ -126,11 +129,11 @@ def make_html_table_for_each_region():
         # Adjust column names
         data.columns = ["Species", "Date"]
         data = data[["Date", "Species"]]
-        # Save to html or JSON
-        # data.to_html(list_dir + region + ".html",index=False)
+        # Save to JSON
         data.to_json(list_dir + region + ".json", orient="values")
+
 
 # build_species_names_list_from_6_letter_codes()
 # build_species_peaks()
-# make_all_species_peaks_per_region()
-make_html_table_for_each_region()
+make_all_species_peaks_per_region()
+make_json_table_for_each_region()
