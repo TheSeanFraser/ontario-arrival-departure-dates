@@ -23,7 +23,7 @@ function updateSelectorList()
 
 }
 
-fetch('https://theseanfraser.github.io/ontario-arrival-departure-dates/media/lists/20_YEARS/CA-ON-TO.json')
+fetch('https://theseanfraser.github.io/ontario-arrival-departure-dates/media/lists/20_YEARS/spring/CA-ON-TO.json')
 	.then(response => response.json())
     .then(text=> torontoListResponse = text)
     .then((response) => {

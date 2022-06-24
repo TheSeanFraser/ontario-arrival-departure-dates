@@ -1,6 +1,6 @@
 'use strict';
 
-var path = 'https://theseanfraser.github.io/ontario-arrival-departure-dates/media/lists/20_YEARS/';
+var path = 'https://theseanfraser.github.io/ontario-arrival-departure-dates/media/lists/20_YEARS/spring/';
 var selectRegionButton = document.getElementById("selectRegionButton");
 var region_response;
 var date_list_response, date_list_json;
