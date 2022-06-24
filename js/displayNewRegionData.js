@@ -66,8 +66,10 @@ function addFallTable(data){
     }
 }
 
-selectRegionButton.onclick = function() {
-	console.log("Button clicked");
+var regionSelect = document.getElementById("regionSelector");
+regionSelect.onchange = function (){updateLists()};
+function updateLists() {
+    console.log("Button clicked");
 	var region = document.getElementById("regionSelector").value;
 
     // Clear the tables for the new data
@@ -82,6 +84,4 @@ selectRegionButton.onclick = function() {
     .then((response) => {
         populateDatesInTable(region_response);
         });
-
-};
-
+}

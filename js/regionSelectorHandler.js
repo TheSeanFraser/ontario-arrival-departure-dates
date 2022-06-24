@@ -74,3 +74,4 @@ function populateFallDateTable(){
         fall_tbody.appendChild(tr)
     }
 }
+
