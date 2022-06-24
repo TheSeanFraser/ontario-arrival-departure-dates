@@ -1,4 +1,4 @@
-# Ontario Arrival & Departure Dates
+# [Ontario Arrival & Departure Dates](https://theseanfraser.github.io/ontario-arrival-departure-dates/)
 Calculating mass bird migration dates for all regions of Ontario based on eBird data.
 
 ## Method
