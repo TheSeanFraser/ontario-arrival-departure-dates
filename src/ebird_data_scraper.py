@@ -6,6 +6,7 @@ import re
 import requests as req
 import config
 
+# Split the complete URL into discrete parts for easy alterations
 url1 = "https://ebird.org/linegraph?bmo=1&emo=12&byr="
 url2_start_year = "2002"
 url3_end_year_tag = "&eyr="
@@ -16,6 +17,7 @@ url7_species_tag = "&spp="
 url8_species = "barswa"
 url9_post = "&fmt=tsv"
 
+# Flag for downloading every year or past 20 years
 every_year = True
 
 
@@ -33,13 +35,9 @@ def fix_species_quotes(species):
 def get_charts(region="Ontario"):
     global every_year
 
-    ######## Commented out to fix bug, replaced by line below for now
-    # # Load the list of species we are working with
-    # species_list = open("../res/ont_species_6letter_likely.txt",
-    #                     'r').read().splitlines()
-
+    ####### Commented out to fix bug, replaced by line below for now
     # Load the list of species we are working with
-    species_list = open("../res/ont_species_6letter_likely_wDIGITS.txt",
+    species_list = open("../res/ont_species_6letter_likely.txt",
                         'r').read().splitlines()
 
     # Load the list of eBird regions in Ontario
