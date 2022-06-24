@@ -161,6 +161,22 @@ p {
 	
 }
 
+.date_list_holder.after{
+      content: "";
+  display: table;
+  clear: both;
+}
+caption{
+    font-size:25px;
+}
+.column{
+    float:left;
+    width:50%;
+     justify-content: center;
+  align-content: center;
+
+}
+
 #left_col{
 	float:left;
 	width: 45%;

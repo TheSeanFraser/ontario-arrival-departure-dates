@@ -33,18 +33,41 @@
         <option style="display: none">Toronto</option>
     </select>
     <input type="button" class="newRegionButton" id="selectRegionButton" value="Display Data">
+    <div>&nbsp</div>
     <div class="date_list_holder">
-        <table class="table table-bordered table-hover table-condensed">
-            <thead>
-            <tr>
-                <th title="Field #1">20 Year AVG</th>
-                <th title="Field #2">Species</th>
-            </tr>
-            </thead>
-            <tbody id="date_list_body">
+        <div class="column">
+            <table class="table table-bordered table-hover table-condensed">
+                <thead>
+                <tr>
+                    <th colspan="2">Spring Mass Arrivals</th>
+                </tr>
+                <tr>
+                    <th title="Field #1">20 Year AVG</th>
+                    <th title="Field #2">Species</th>
+                </tr>
+                </thead>
+                <tbody id="spring_date_list_body">
 
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
+        <div class="column">&nbsp</div>
+        <div class="column">
+             <table class="table table-bordered table-hover table-condensed">
+                <thead>
+                <tr>
+                    <th colspan="2">Fall Mass Arrivals</th>
+                </tr>
+                <tr>
+                    <th title="Field #1">20 Year AVG</th>
+                    <th title="Field #2">Species</th>
+                </tr>
+                </thead>
+                <tbody id="fall_date_list_body">
+
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 
