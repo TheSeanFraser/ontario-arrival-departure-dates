@@ -1,7 +1,7 @@
 'use strict';
 
-var spring_path = 'https://theseanfraser.github.io/ontario-arrival-departure-dates/media/maps/spring/';
-var fall_path = 'https://theseanfraser.github.io/ontario-arrival-departure-dates/media/maps/fall/';
+var spring_path = 'https://numbirds.ca/ontario-arrival-departure-dates/media/maps/spring/';
+var fall_path = 'https://numbirds.ca/ontario-arrival-departure-dates/media/maps/fall/';
 var speciesSelector = document.getElementById("speciesSelector");
 
 speciesSelector.onchange = function (){loadNewMaps()};

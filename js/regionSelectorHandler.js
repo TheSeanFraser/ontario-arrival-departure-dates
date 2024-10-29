@@ -1,7 +1,7 @@
 var regionListResponse;
 var torontoListResponse;
 
-fetch('https://theseanfraser.github.io/ontario-arrival-departure-dates/res/regions_complete.json')
+fetch('https://numbirds.ca/ontario-arrival-departure-dates/res/regions_complete.json')
 	.then(response => response.json())
     .then(text=> regionListResponse = text)
     .then((response) => {
@@ -23,7 +23,7 @@ function updateSelectorList()
 
 }
 
-fetch('https://theseanfraser.github.io/ontario-arrival-departure-dates/media/lists/20_YEARS/spring/CA-ON-TO.json')
+fetch('https://numbirds.ca/ontario-arrival-departure-dates/media/lists/20_YEARS/spring/CA-ON-TO.json')
 	.then(response => response.json())
     .then(text=> torontoListResponse = text)
     .then((response) => {
@@ -49,7 +49,7 @@ function populateSpringDateTable(){
     }
 }
 
-fetch('https://theseanfraser.github.io/ontario-arrival-departure-dates/media/lists/20_YEARS/fall/CA-ON-TO.json')
+fetch('https://numbirds.ca/ontario-arrival-departure-dates/media/lists/20_YEARS/fall/CA-ON-TO.json')
 	.then(response => response.json())
     .then(text=> torontoListResponse = text)
     .then((response) => {

@@ -1,6 +1,6 @@
 'use strict';
 
-var path = 'https://theseanfraser.github.io/ontario-arrival-departure-dates/media/lists/20_YEARS/';
+var path = 'https://numbirds.ca/ontario-arrival-departure-dates/media/lists/20_YEARS/';
 var selectRegionButton = document.getElementById("selectRegionButton");
 var region_response;
 var date_list_response, date_list_json;
@@ -78,7 +78,7 @@ function updateLists() {
 	table = document.getElementById("fall_date_list_body");
 	table.innerHTML = "";
 
-	fetch('https://theseanfraser.github.io/ontario-arrival-departure-dates/res/regions_complete.json')
+	fetch('https://numbirds.ca/ontario-arrival-departure-dates/res/regions_complete.json')
 	.then(response => response.json())
     .then(text => region_response = text)
     .then((response) => {
