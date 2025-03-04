@@ -691,3 +691,4 @@ cython_debug/
 .vscode/launch.json
 src/config.py
 /data/
+/res/res_region

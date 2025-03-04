@@ -15,11 +15,6 @@ week_day_of_year_list = [0, 7, 14, 21, 31, 38, 45, 52, 59, 66, 73, 80, 90,
                          250, 257, 264, 273, 280, 287, 294, 304, 311, 318,
                          325, 334, 341, 348, 356]
 
-all_data = {
-    "Year": []
-}
-
-
 # Find the maximum frequency during spring
 def calculate_peak_spring_arrival(data):
     # "Spring" starts March 1 and ends week of June 1
@@ -53,20 +48,27 @@ def calculate_winter_frequency(data):
 
     return winter_freq
 
-
 # Calculate the date of the mass spring arrivals
-def calculate_spring_mass_arrival():
-    directory = config.proj_path + "data\\toronto\\"
+def bulk_20_years_calculate_spring_mass_arrival():
+    # Load the list of eBird regions in Ontario
+    with open(config.res_dir + "regions_complete.json") as json_file:
+        regions_dict = json.load(json_file)
 
-    for subdir, dirs, files in os.walk(directory):
-        path = pathlib.PurePath(subdir)
-        year = path.name
-        if len(year) == 4:
-            print(year)
-            all_data["Year"] = all_data["Year"] + [year]
+    for region in regions_dict:
+        # Create the table to hold all of the data
+        all_data = {
+            "Species": ["Mass Arrival Date", "Peak Date", "Peak Over Date"]
+        }
+
+        print("Starting " + region)
+        directory = config.regions_data_dir + regions_dict[region] \
+                    + "\\20_YEARS\\"
+
+        # Iterate through all the regions' species files
+        for subdir, dirs, files in os.walk(directory):
             for file in files:
                 f = os.path.join(subdir, file)
-                data = pd.read_csv(f, delimiter="\t", header=None)
+                data = pd.read_csv(f, delimiter="\t", header=None, on_bad_lines='skip')
                 # Dates start at column 2, frequency is row 2
                 # Full species name at [1][2]
 
@@ -93,244 +95,65 @@ def calculate_spring_mass_arrival():
                 # to find the exact day with the matching frequency
                 calendar_list = calendar_list.interpolate()
 
-                # Find the mass arrival day based on peak day. Starts at the peak and
-                # goes backwards until it finds a matching frequency
-                mass_arrival_day = 1
-                for i in range(peak_day, 0, -1):
-                    # If the mass frequency is greater than the frequency on the
-                    # selected day, that means we have the right day because all others
-                    # have been higher than the mass frequency.
-                    if calendar_list[i] - mass_freq < 0:
-                        mass_arrival_day = i
-                        break
+                # Find the mass arrival day based on peak day
+                mass_arrival_day = find_mass_arriv_day(peak_day, calendar_list, mass_freq)
 
-                # Convert the day to a string, then create a datetime object for the
-                # date for easier conversion.
-                mass_arrival_date = str(mass_arrival_day)
-                mass_arrival_date.rjust(3 + len(mass_arrival_date), '0')
-                year = "2022"
-                date = datetime.strptime(year + "-" + mass_arrival_date,
-                                         "%Y-%j").strftime("%Y-%m-%d")
-                date_string = str(date)
+                # If no arrival day is found, then it has not been recorded in the region,
+                # so skip to next species
+                if mass_arrival_day == 1:
+                    continue
+
+                # Find the end of the peak
+                peak_over_day = find_peak_over_day(peak_day,calendar_list, mass_freq)
+
+                # Convert day number to date string
+                mass_arriv_date_string = date_string_maker(mass_arrival_day)
+                peak_date_string = date_string_maker(peak_day)
+                peak_over_date_string = date_string_maker(peak_over_day)
 
                 if str(data[1][2]) in all_data.keys():
-                    all_data[str(data[1][2])] = all_data[str(data[1][2])] + [date_string]
+                    all_data[str(data[1][2])] = all_data[str(data[1][2])] + [mass_arriv_date_string, peak_date_string,peak_over_date_string]
                 else:
-                    all_data[str(data[1][2])] = [date_string]
-
-
-    # for file in os.listdir(directory):
-    #     f = os.path.join(directory, file)
-    #     data = pd.read_csv(f, delimiter="\t", header=None)
-    #     # Dates start at column 2, frequency is row 2
-    #     # Full species name at [1][2]
-    #
-    #     spring_peak_freq, peak_spring_date_index = calculate_peak_spring_arrival(
-    #         data)
-    #     winter_freq = calculate_winter_frequency(data)
-    #     mass_freq = (M_factor * (spring_peak_freq - winter_freq)) + winter_freq
-    #
-    #     # Create a list to store all frequency numbers in each day of year
-    #     calendar_list = pd.Series([np.nan] * 365)
-    #
-    #     # Find the day of the year with the peak spring frequency week
-    #     peak_day = int(week_day_of_year_list[int(peak_spring_date_index)])
-    #
-    #     # Enter the frequency data into the calendar list
-    #     for x in range(len(week_day_of_year_list)):
-    #         calendar_list[week_day_of_year_list[x]] = float(data[x + 2][2])
-    #
-    #     # Interpolate the frequency data for each day of year, not just week
-    #     # start day. This calculates all the "in-between" frequencies needed
-    #     # to find the exact day with the matching frequency
-    #     calendar_list = calendar_list.interpolate()
-    #
-    #     # Find the mass arrival day based on peak day. Starts at the peak and
-    #     # goes backwards until it finds a matching frequency
-    #     mass_arrival_day = 1
-    #     for i in range(peak_day, 0, -1):
-    #         # If the mass frequency is greater than the frequency on the
-    #         # selected day, that means we have the right day because all others
-    #         # have been higher than the mass frequency.
-    #         if calendar_list[i] - mass_freq < 0:
-    #             mass_arrival_day = i
-    #             break
-    #
-    #     # Convert the day to a string, then create a datetime object for the
-    #     # date for easier conversion.
-    #     mass_arrival_date = str(mass_arrival_day)
-    #     mass_arrival_date.rjust(3 + len(mass_arrival_date), '0')
-    #     year = "2022"
-    #     date = datetime.strptime(year + "-" + mass_arrival_date,
-    #                              "%Y-%j").strftime("%m-%d")
-    #     date_string = str(date)
-    #
-    #     output_file = open(config.proj_path +
-    #                        "data\ontario\\20_YEARS\species_arrivals.txt", "a")
-    #     output_file.write(data[1][2] + ", " + date_string + "\n")
-    #     output_file.close()
-
-    # print(all_data)
-    pd.DataFrame.from_dict(data=all_data, orient='index').to_csv(
-        "../data/toronto_all_data.csv", header=False)
-
-
-# Calculate the date of the mass spring arrivals
-def bulk_calculate_spring_mass_arrival():
-    # Load the list of eBird regions in Ontario
-    with open(config.res_dir + "regions_complete.json") as json_file:
-        regions_dict = json.load(json_file)
-
-    for region in regions_dict:
-        all_data = {
-            "Year": []
-        }
-        print("Starting " + region)
-        directory = config.proj_path + "data\\" + regions_dict[region] + "\\"
-
-        for subdir, dirs, files in os.walk(directory):
-            path = pathlib.PurePath(subdir)
-            year = path.name
-            if len(year) == 4:
-                print(year)
-                all_data["Year"] = all_data["Year"] + [year]
-                for file in files:
-                    f = os.path.join(subdir, file)
-                    data = pd.read_csv(f, delimiter="\t", header=None)
-                    # Dates start at column 2, frequency is row 2
-                    # Full species name at [1][2]
-
-                    spring_peak_freq, peak_spring_date_index = calculate_peak_spring_arrival(
-                        data)
-                    winter_freq = calculate_winter_frequency(data)
-                    mass_freq = (M_factor * (
-                                spring_peak_freq - winter_freq)) + winter_freq
-
-                    # Create a list to store all frequency numbers in each day of year
-                    calendar_list = pd.Series([np.nan] * 365)
-
-                    # Find the day of the year with the peak spring frequency week
-                    peak_day = int(
-                        week_day_of_year_list[int(peak_spring_date_index)])
-
-                    # Enter the frequency data into the calendar list
-                    for x in range(len(week_day_of_year_list)):
-                        calendar_list[week_day_of_year_list[x]] = float(
-                            data[x + 2][2])
-
-                    # Interpolate the frequency data for each day of year, not just week
-                    # start day. This calculates all the "in-between" frequencies needed
-                    # to find the exact day with the matching frequency
-                    calendar_list = calendar_list.interpolate()
-
-                    # Find the mass arrival day based on peak day. Starts at the peak and
-                    # goes backwards until it finds a matching frequency
-                    mass_arrival_day = 1
-                    for i in range(peak_day, 0, -1):
-                        # If the mass frequency is greater than the frequency on the
-                        # selected day, that means we have the right day because all others
-                        # have been higher than the mass frequency.
-                        if calendar_list[i] - mass_freq < 0:
-                            mass_arrival_day = i
-                            break
-
-                    # Convert the day to a string, then create a datetime object for the
-                    # date for easier conversion.
-                    mass_arrival_date = str(mass_arrival_day)
-                    mass_arrival_date.rjust(3 + len(mass_arrival_date), '0')
-                    year = "2022"
-                    date = datetime.strptime(year + "-" + mass_arrival_date,
-                                             "%Y-%j").strftime("%Y-%m-%d")
-                    date_string = str(date)
-
-                    if str(data[1][2]) in all_data.keys():
-                        all_data[str(data[1][2])] = all_data[str(data[1][2])] + [date_string]
-                    else:
-                        all_data[str(data[1][2])] = [date_string]
-
-        spring_peaks_path = config.regions_data_dir + "\\region_spring_peaks\\" + region + "_spring_peaks.csv"
-        pd.DataFrame.from_dict(data=all_data, orient='index').to_csv(spring_peaks_path, header=False)
-        print(region + " complete")
-
-# Calculate the date of the mass spring arrivals
-def bulk_20_years_calculate_spring_mass_arrival():
-    # Load the list of eBird regions in Ontario
-    with open(config.res_dir + "regions_complete.json") as json_file:
-        regions_dict = json.load(json_file)
-
-    for region in regions_dict:
-        all_data = {
-            "Year": []
-        }
-        print("Starting " + region)
-        directory = config.regions_data_dir + regions_dict[region] \
-                    + "\\20_YEARS\\"
-
-        year = "TWENTY"
-        for subdir, dirs, files in os.walk(directory):
-            path = pathlib.PurePath(subdir)
-            year = path.name
-            if year == "20_YEARS":
-                print(year)
-                all_data["Year"] = all_data["Year"] + [year]
-                for file in files:
-                    f = os.path.join(subdir, file)
-                    data = pd.read_csv(f, delimiter="\t", header=None)
-                    # Dates start at column 2, frequency is row 2
-                    # Full species name at [1][2]
-
-                    spring_peak_freq, peak_spring_date_index = calculate_peak_spring_arrival(
-                        data)
-                    winter_freq = calculate_winter_frequency(data)
-                    mass_freq = (M_factor * (
-                                spring_peak_freq - winter_freq)) + winter_freq
-
-                    # Create a list to store all frequency numbers in each day of year
-                    calendar_list = pd.Series([np.nan] * 365)
-
-                    # Find the day of the year with the peak spring frequency week
-                    peak_day = int(
-                        week_day_of_year_list[int(peak_spring_date_index)])
-
-                    # Enter the frequency data into the calendar list
-                    for x in range(len(week_day_of_year_list)):
-                        calendar_list[week_day_of_year_list[x]] = float(
-                            data[x + 2][2])
-
-                    # Interpolate the frequency data for each day of year, not just week
-                    # start day. This calculates all the "in-between" frequencies needed
-                    # to find the exact day with the matching frequency
-                    calendar_list = calendar_list.interpolate()
-
-                    # Find the mass arrival day based on peak day. Starts at the peak and
-                    # goes backwards until it finds a matching frequency
-                    mass_arrival_day = 1
-                    for i in range(peak_day, 0, -1):
-                        # If the mass frequency is greater than the frequency on the
-                        # selected day, that means we have the right day because all others
-                        # have been higher than the mass frequency.
-                        if calendar_list[i] - mass_freq < 0:
-                            mass_arrival_day = i
-                            break
-
-                    # Convert the day to a string, then create a datetime object for the
-                    # date for easier conversion.
-                    mass_arrival_date = str(mass_arrival_day)
-                    mass_arrival_date.rjust(3 + len(mass_arrival_date), '0')
-                    year = "2022"
-                    date = datetime.strptime(year + "-" + mass_arrival_date,
-                                             "%Y-%j").strftime("%Y-%m-%d")
-                    date_string = str(date)
-
-                    if str(data[1][2]) in all_data.keys():
-                        all_data[str(data[1][2])] = all_data[str(data[1][2])] + [date_string]
-                    else:
-                        all_data[str(data[1][2])] = [date_string]
+                    all_data[str(data[1][2])] = [mass_arriv_date_string, peak_date_string,peak_over_date_string]
 
         spring_peaks_path = config.regions_data_dir + "\\region_spring_peaks\\20_YEARS\\" + regions_dict[region] + "_spring_peaks.csv"
         pd.DataFrame.from_dict(data=all_data, orient='index').to_csv(spring_peaks_path, header=False)
         print(region + " complete")
 
+# Convert day number to date string
+def date_string_maker(day):
+    day = str(day)
+    day.rjust(3 + len(day), '0')
+    year = "2022"
+    date = datetime.strptime(year + "-" + day,
+                             "%Y-%j").strftime("%Y-%m-%d")
+    date_string = str(date)
+    return date_string
+
+# Find the mass arrival day based on peak day. Starts at the peak and
+# goes backwards until it finds a matching frequency
+def find_mass_arriv_day(peak_day, calendar_list, mass_freq):
+    mass_arrival_day = 1
+    for i in range(peak_day, 0, -1):
+        # If the mass frequency is greater than the frequency on the
+        # selected day, that means we have the right day because all others
+        # have been higher than the mass frequency.
+        if calendar_list[i] - mass_freq < 0:
+            mass_arrival_day = i
+            break
+    return mass_arrival_day
+
+# Find the end of the curve for when the species is no longer expected
+def find_peak_over_day(peak_day, calendar_list, mass_freq):
+    peak_over_day = 1
+    for i in range(peak_day, 365, 1):
+        # If the mass frequency is greater than the frequency on the
+        # selected day, that means we have the right day because all others
+        # have been higher than the mass frequency.
+        if calendar_list[i] - mass_freq < 0:
+            peak_over_day = i
+            break
+    return peak_over_day
 
 # calculate_spring_mass_arrival()
 # bulk_calculate_spring_mass_arrival()

@@ -18,7 +18,7 @@ url8_species = "barswa"
 url9_post = "&fmt=tsv"
 
 # Flag for downloading every year or past 20 years
-every_year = True
+every_year = False
 
 
 # Removes quotes from species codes
@@ -37,7 +37,9 @@ def get_charts(region="Ontario"):
 
     ####### Commented out to fix bug, replaced by line below for now
     # Load the list of species we are working with
-    species_list = open("../res/ont_species_6letter_likely.txt",
+    # species_list = open("../res/ont_species_6letter_likely.txt",
+    #                     'r').read().splitlines()
+    species_list = open("../res/ont_species_all_2025.txt",
                         'r').read().splitlines()
 
     # Load the list of eBird regions in Ontario
@@ -76,10 +78,21 @@ def get_charts(region="Ontario"):
             # Build the URL list to download
             url_list = []
             year = "20_YEARS"
+            # BELOW IS COMMENTED OUT TO FIX
+            # for species in species_list:
+            #     species_fixed = fix_species_quotes(species)
+            #     url2_start_year = "2004"
+            #     url4_end_year = "2024"
+            #     url8_species = species_fixed
+            #     year_url = url1 + url2_start_year + url3_end_year_tag \
+            #                + url4_end_year + url5_region_tag + url6_region \
+            #                + url7_species_tag + url8_species + url9_post
+            #     url_list.append(year_url)
+
             for species in species_list:
                 species_fixed = fix_species_quotes(species)
-                url2_start_year = "2001"
-                url4_end_year = "2021"
+                url2_start_year = "2004"
+                url4_end_year = "2024"
                 url8_species = species_fixed
                 year_url = url1 + url2_start_year + url3_end_year_tag \
                            + url4_end_year + url5_region_tag + url6_region \
@@ -161,6 +174,8 @@ def download_one(region, year):
     print(str(year) + " complete: " + str(datetime.datetime.now()))
 
 
-get_charts()
 
-# download_one("CA-ON-PE", 1999)
+
+# get_charts()
+
+download_one("CA-ON-PE", 2024)
