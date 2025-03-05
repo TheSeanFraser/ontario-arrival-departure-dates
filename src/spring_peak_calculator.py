@@ -49,20 +49,18 @@ def calculate_winter_frequency(data):
     return winter_freq
 
 # Calculate the date of the mass spring arrivals
+# noinspection PyTypeChecker
 def bulk_20_years_calculate_spring_mass_arrival():
     # Load the list of eBird regions in Ontario
     with open(config.res_dir + "regions_complete.json") as json_file:
         regions_dict = json.load(json_file)
 
     for region in regions_dict:
-        # Create the table to hold all of the data
-        all_data = {
-            "Species": ["Mass Arrival Date", "Peak Date", "Peak Over Date"]
-        }
+        # Create a dictionary to hold all the dates for each species
+        dates = {}
 
         print("Starting " + region)
-        directory = config.regions_data_dir + regions_dict[region] \
-                    + "\\20_YEARS\\"
+        directory = config.regions_data_dir + regions_dict[region] \ + "\\20_YEARS\\"
 
         # Iterate through all the regions' species files
         for subdir, dirs, files in os.walk(directory):
@@ -111,13 +109,14 @@ def bulk_20_years_calculate_spring_mass_arrival():
                 peak_date_string = date_string_maker(peak_day)
                 peak_over_date_string = date_string_maker(peak_over_day)
 
-                if str(data[1][2]) in all_data.keys():
-                    all_data[str(data[1][2])] = all_data[str(data[1][2])] + [mass_arriv_date_string, peak_date_string,peak_over_date_string]
-                else:
-                    all_data[str(data[1][2])] = [mass_arriv_date_string, peak_date_string,peak_over_date_string]
+                # Add species entry to the dates json object
+                entry = {
+                    str(data[1][2]): [mass_arriv_date_string, peak_date_string, peak_over_date_string]
+                }
+                dates = dates | entry
 
-        spring_peaks_path = config.regions_data_dir + "\\region_spring_peaks\\20_YEARS\\" + regions_dict[region] + "_spring_peaks.csv"
-        pd.DataFrame.from_dict(data=all_data, orient='index').to_csv(spring_peaks_path, header=False)
+        spring_peaks_json_path = config.spring_peaks_dir + regions_dict[region] + ".json"
+        pd.DataFrame.from_dict(data=dates, orient='columns').to_json(spring_peaks_json_path)
         print(region + " complete")
 
 # Convert day number to date string
@@ -126,7 +125,9 @@ def date_string_maker(day):
     day.rjust(3 + len(day), '0')
     year = "2022"
     date = datetime.strptime(year + "-" + day,
-                             "%Y-%j").strftime("%Y-%m-%d")
+                             "%Y-%j").strftime("%m-%d")
+    # date = datetime.strptime(year + "-" + day,
+    #                          "%Y-%j").strftime("%Y-%m-%d")
     date_string = str(date)
     return date_string
 
